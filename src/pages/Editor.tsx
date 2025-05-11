@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MDEditor from '@uiw/react-md-editor';
-import { Box, Button, AppBar, Toolbar, Typography, IconButton } from '@mui/material';
-import { PictureAsPdf, Download } from '@mui/icons-material';
+import { Box, Button } from '@mui/material';
+import { Download } from '@mui/icons-material';
 import html2pdf from 'html2pdf.js';
 import styled from '@emotion/styled';
 import { useTheme } from '../context/ThemeContext';
@@ -33,13 +33,6 @@ const EditorArea = styled(Box)<{ $dark?: boolean }>`
   min-height: 500px;
 `;
 
-const EditorHeader = styled(Box)`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 12px 16px 0 16px;
-`;
-
 const PreviewArea = styled(Box)<{ $dark?: boolean }>`
   border: 1px solid #e0e0e0;
   border-radius: 8px;
@@ -49,12 +42,6 @@ const PreviewArea = styled(Box)<{ $dark?: boolean }>`
   position: relative;
   display: flex;
   flex-direction: column;
-`;
-
-const StyledAppBar = styled(AppBar)`
-  background-color: var(--background);
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
 `;
 
 const DownloadButton = styled(Button)`
@@ -87,7 +74,7 @@ const Editor: React.FC = () => {
 
   const handleDownload = () => {
     const element = document.createElement('div');
-    element.innerHTML = marked.parse(value);
+    element.innerHTML = marked.parse(value) as string;
     element.style.fontFamily = "'Noto Sans KR', sans-serif";
     element.style.fontSize = `${fontSize}px`;
     element.style.padding = '20px';
@@ -142,14 +129,12 @@ const Editor: React.FC = () => {
               border: 'none',
               borderRadius: '8px',
             }}
-            theme={theme === 'dark' ? 'dark' : 'light'}
             preview="edit"
           />
         </EditorArea>
         <PreviewArea $dark={theme === 'dark'}>
           <MDEditor.Markdown
             source={value}
-            theme={theme === 'dark' ? 'dark' : 'light'}
             style={{
               background: theme === 'dark' ? '#18191c' : '#fff',
               color: theme === 'dark' ? '#fff' : '#222',
