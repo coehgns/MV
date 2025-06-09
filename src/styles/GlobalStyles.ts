@@ -37,6 +37,7 @@ export const globalStyles = css`
     background-color: var(--background);
     color: var(--text);
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 16px;
   }
 
   button {

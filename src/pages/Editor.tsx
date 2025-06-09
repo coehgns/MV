@@ -141,6 +141,7 @@ const Editor: React.FC = () => {
               borderRadius: '8px',
               padding: '16px',
               minHeight: '100%',
+              fontSize: `${fontSize}px`,
             }}
           />
           <DownloadButton
